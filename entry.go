@@ -33,7 +33,7 @@ func (service *EntriesService) GetEntryKey(entry *Entry, key string) (*EntryFiel
 		value: entry.Fields[key],
 	}
 
-	col, err := service.c.ContentTypes.List(entry.Sys.Space.Sys.ID).Next()
+	col, err := service.c.ContentTypes.List(entry.Sys.Space.Sys.ID, nil).Next()
 	if err != nil {
 		return nil, err
 	}
@@ -56,10 +56,13 @@ func (service *EntriesService) GetEntryKey(entry *Entry, key string) (*EntryFiel
 }
 
 // List returns entries collection
-func (service *EntriesService) List(spaceID string) *Collection {
+func (service *EntriesService) List(spaceID string, q *Query) *Collection {
 	path := fmt.Sprintf("/spaces/%s/environments/%s/entries", spaceID, service.c.Environment)
-
-	req, err := service.c.newRequest(http.MethodGet, path, nil, nil)
+	var params url.Values = nil
+	if q != nil {
+		params = q.Values()
+	}
+	req, err := service.c.newRequest(http.MethodGet, path, params, nil)
 	if err != nil {
 		return &Collection{}
 	}
@@ -67,7 +70,7 @@ func (service *EntriesService) List(spaceID string) *Collection {
 	col := NewCollection(&CollectionOptions{})
 	col.c = service.c
 	col.req = req
-	
+
 	return col
 }
 

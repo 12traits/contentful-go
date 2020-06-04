@@ -25,7 +25,7 @@ func ExampleContentTypesService_Get() {
 func ExampleContentTypesService_List() {
 	cma := NewCMA("cma-token")
 
-	collection, err := cma.ContentTypes.List("space-id").Next()
+	collection, err := cma.ContentTypes.List("space-id", nil).Next()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -129,7 +129,7 @@ func ExampleContentTypesService_Delete() {
 func ExampleContentTypesService_Delete_allDrafts() {
 	cma := NewCMA("cma-token")
 
-	collection, err := cma.ContentTypes.List("space-id").Next()
+	collection, err := cma.ContentTypes.List("space-id", nil).Next()
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -168,7 +168,7 @@ func TestContentTypesServiceList(t *testing.T) {
 	cma = NewCMA(CMAToken)
 	cma.BaseURL = server.URL
 
-	_, err = cma.ContentTypes.List(spaceID).Next()
+	_, err = cma.ContentTypes.List(spaceID, nil).Next()
 	assert.Nil(err)
 }
 

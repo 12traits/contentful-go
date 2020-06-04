@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
+	"net/url"
 	"strconv"
 )
 
@@ -289,11 +290,15 @@ func (ct *ContentType) GetVersion() int {
 }
 
 // List return a content type collection
-func (service *ContentTypesService) List(spaceID string) *Collection {
+func (service *ContentTypesService) List(spaceID string, q *Query) *Collection {
 	path := fmt.Sprintf("/spaces/%s/content_types", spaceID)
 	method := "GET"
 
-	req, err := service.c.newRequest(method, path, nil, nil)
+	var params url.Values = nil
+	if q != nil {
+		params = q.Values()
+	}
+	req, err := service.c.newRequest(method, path, params, nil)
 	if err != nil {
 		return nil
 	}
