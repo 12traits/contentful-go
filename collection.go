@@ -26,16 +26,11 @@ type Collection struct {
 }
 
 // NewCollection initilazies a new collection
-func NewCollection(options *CollectionOptions) *Collection {
-	query := NewQuery()
-	query.Order("sys.createdAt", true)
-
-	if options.Limit > 0 {
-		query.Limit(options.Limit)
-	}
+func NewCollection(q *Query) *Collection {
+	q.Order("sys.createdAt", true)
 
 	return &Collection{
-		Query: *query,
+		Query: *q,
 		page:  1,
 	}
 }

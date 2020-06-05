@@ -303,7 +303,7 @@ func (service *ContentTypesService) List(spaceID string, q *Query) *Collection {
 		return nil
 	}
 
-	col := NewCollection(&CollectionOptions{})
+	col := NewCollection(q)
 	col.c = service.c
 	col.req = req
 

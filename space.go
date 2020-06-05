@@ -43,7 +43,7 @@ func (space *Space) GetVersion() int {
 func (service *SpacesService) List() *Collection {
 	req, _ := service.c.newRequest("GET", "/spaces", nil, nil)
 
-	col := NewCollection(&CollectionOptions{})
+	col := NewCollection(nil)
 	col.c = service.c
 	col.req = req
 

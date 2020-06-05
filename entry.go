@@ -67,7 +67,7 @@ func (service *EntriesService) List(spaceID string, q *Query) *Collection {
 		return &Collection{}
 	}
 
-	col := NewCollection(&CollectionOptions{})
+	col := NewCollection(q)
 	col.c = service.c
 	col.req = req
 

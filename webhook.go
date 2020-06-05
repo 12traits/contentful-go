@@ -47,7 +47,7 @@ func (service *WebhooksService) List(spaceID string) *Collection {
 		return &Collection{}
 	}
 
-	col := NewCollection(&CollectionOptions{})
+	col := NewCollection(nil)
 	col.c = service.c
 	col.req = req
 
