@@ -6,9 +6,9 @@ import (
 	"net/http"
 )
 
-// CollectionOptions holds init options
-type CollectionOptions struct {
-	Limit uint16
+// LinkedEntries .
+type LinkedEntries struct {
+	Entries []Entry `json:"Entry"`
 }
 
 // Collection model
@@ -22,7 +22,7 @@ type Collection struct {
 	Skip     int           `json:"skip"`
 	Limit    int           `json:"limit"`
 	Items    []interface{} `json:"items"`
-	Includes interface{}   `json:"includes"`
+	Includes LinkedEntries `json:"includes"`
 }
 
 // NewCollection initilazies a new collection
