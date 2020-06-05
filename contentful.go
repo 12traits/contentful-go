@@ -4,13 +4,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
 	"strconv"
 	"time"
 
+	log "github.com/sirupsen/logrus"
 	"moul.io/http2curl"
 )
 
@@ -167,7 +167,7 @@ func (c *Client) newRequest(method, path string, query url.Values, body io.Reade
 func (c *Client) do(req *http.Request, v interface{}) error {
 	if c.Debug == true {
 		command, _ := http2curl.GetCurlCommand(req)
-		fmt.Println(command)
+		log.Println(command)
 	}
 
 	res, err := c.client.Do(req)
@@ -220,7 +220,7 @@ func (c *Client) handleError(req *http.Request, res *http.Response) error {
 			log.Fatal(err)
 		}
 
-		fmt.Printf("%q", dump)
+		log.Printf("%q", dump)
 	}
 
 	var e ErrorResponse
