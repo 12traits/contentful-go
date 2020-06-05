@@ -10,6 +10,15 @@ import (
 // EntriesService service
 type EntriesService service
 
+// LinkedEntry .
+type LinkedEntry struct {
+	Sys struct {
+		Type     string `json:"type"`
+		LinkType string `json:"linkType"`
+		ID       string `json:"id"`
+	} `json:"sys"`
+}
+
 //Entry model
 type Entry struct {
 	locale string
